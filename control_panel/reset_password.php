@@ -36,69 +36,63 @@ $(document).pngFix( );
 	
 	<!--  start login-inner -->
 	<div id="login-inner">
-<div class="container" align="center">
+
     
-    
-<?php
-
-if(isset($_SESSION['error']))
-
-{
-	if($_SESSION['error']==1)
-	{
-
-?>    
-
-<center>
-<h4 style="color:#F00">Some Problem Occured !!</h4>
-</center>
-
-<?php
-	}
-	
-	unset($_SESSION['error']);
-}
-?>
-
-
-<?php
-
-$email= mysql_escape_string($_REQUEST['email']);
-$token= mysql_escape_string($_REQUEST['token']);
-
-?>
-
-		
-      <form name="myForm" class="form-signin" action="changing_password_forgote.php" method="post" onsubmit="return validateForm()">
-      <table>
-      <input type="hidden" name="email" value="<?php echo $email; ?>"> 
-      <input type="hidden" name="token" value="<?php echo $token; ?>">
-      <tr>
-      
-        <td><h4 class="form-signin-heading">Enter Your New Password :</h4></td>
-        <td><input type="password" name="password"  placeholder="New Password"></td>
-        
-        </tr>
-        <tr>
-        <td><h4 class="form-signin-heading">Re-Type Password :</h4></td>
-        <td><input type="password" name="re_password"  placeholder="Re-Type Password"></td>
-        </tr>
-        <tr>
-        <td><button class="submit-login" type="submit"></button></td>
-        </tr>
-        
-        
-        </table>
-      </form>
-      
-      
-      
-      
-
-    </div>
-      
-
-    </div>
+                    
+                <?php
+                
+                if(isset($_SESSION['error']))
+                
+                {
+                    if($_SESSION['error']==1)
+                    {
+                
+                ?>    
+                
+                <center>
+                <h4 style="color:#F00">Some Problem Occured !!</h4>
+                </center>
+                
+                <?php
+                    }
+                    
+                    unset($_SESSION['error']);
+                }
+                ?>
+                
+                
+                <?php
+                
+                $email= mysql_escape_string($_REQUEST['email']);
+                $token= mysql_escape_string($_REQUEST['token']);
+                
+                ?>
+                
+                        
+                      <form name="myForm" class="form-signin" action="changing_password_forgote.php" method="post" onsubmit="return validateForm()">
+                     <table border="0" cellpadding="0" cellspacing="0">
+                      <input type="hidden" name="email" value="<?php echo $email; ?>"> 
+                      <input type="hidden" name="token" value="<?php echo $token; ?>">
+                      <tr>
+                      
+                         <th>ENTER PASSWORD</th>
+                        <td><input type="password" class="login-inp" name="password"  placeholder="New Password" /></td>
+                        
+                        </tr>
+                        <tr>
+                        <th>RE-TYPE PASSWORD</th>
+                        <td><input type="password" class="login-inp" name="re_password"  placeholder="Re-Type Password" /></td>
+                        </tr>
+                        <tr>
+                        <th></th>
+                        <td><button class="submit-login" type="submit"></button></td>
+                        </tr>
+                        
+                        
+                        </table>
+                      </form>
+                      
+                </div>
     
 	
  </div>
