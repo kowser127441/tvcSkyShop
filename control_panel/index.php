@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -33,17 +36,39 @@ $(document).pngFix( );
 	
 	<!--  start loginbox ................................................................................. -->
 	<div id="loginbox">
+        
+<?php
+
+if(isset($_SESSION['admin_access_error']))
+
+{
+	if($_SESSION['admin_access_error']==1)
+	{
+
+?>    
+
+<center>
+<h4 style="color:#F00">Wrong Information !!</h4>
+</center>
+
+<?php
+	}
+	
+	unset($_SESSION['admin_access_error']);
+}
+?>
 	
 	<!--  start login-inner -->
 	<div id="login-inner">
+    <form class="form-signin" action="admin_login_check.php" method="post">
 		<table border="0" cellpadding="0" cellspacing="0">
 		<tr>
 			<th>Username</th>
-			<td><input type="text"  class="login-inp" /></td>
+			<td><input type="text" name="name"  class="login-inp" placeholder="UserName" /></td>
 		</tr>
 		<tr>
 			<th>Password</th>
-			<td><input type="password" value="************"  onfocus="this.value=''" class="login-inp" /></td>
+			<td><input type="password" name="password"  class="login-inp" placeholder="Password" /></td>
 		</tr>
 		<tr>
 			<th></th>
@@ -51,9 +76,10 @@ $(document).pngFix( );
 		</tr>
 		<tr>
 			<th></th>
-			<td><input type="button" class="submit-login"  /></td>
+			<td> <button type="submit" class="submit-login" style="color:#306; size:1000"></button></td>
 		</tr>
 		</table>
+        </form>
 	</div>
  	<!--  end login-inner -->
 	<div class="clear"></div>

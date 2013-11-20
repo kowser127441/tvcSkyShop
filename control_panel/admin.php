@@ -1,3 +1,32 @@
+<?php
+session_start();
+
+if (isset($_SESSION['admin_access'])) 
+{
+}
+else
+{
+	header("Location:logout.php");
+	}
+	
+// Session Time out
+
+
+$inactive =1200; // Set timeout period in seconds
+
+if (isset($_SESSION['timeout'])) {
+    $session_life = time() - $_SESSION['timeout'];
+    if ($session_life > $inactive) {
+        session_destroy();
+        header("Location: logout.php");
+		echo "session time out";
+    }
+}
+$_SESSION['timeout'] = time();
+?>
+
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
