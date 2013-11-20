@@ -337,6 +337,7 @@ $(document).pngFix( );
             Type : <?php echo $admin_type;?>
             <br/>
             <br/>
+            
            <div style="width:500px;">
     
    
@@ -346,8 +347,14 @@ $(document).pngFix( );
     <input type="hidden" name="admin_id" value="<?php echo $_SESSION['admin_access'];?>">
     
     
-    <table width="380" border="0">
- 
+    <table width="380">
+     <tr>
+        <td align="right" style="color:#F00; font:button; font-size:24px">Change Password</td>
+        
+        
+        </tr>
+        
+        <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
          
          <tr>
         <td>Old Password :</td>
