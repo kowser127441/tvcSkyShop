@@ -142,7 +142,9 @@ $(document).pngFix( );
 	
 		<!--  end forgot-inner -->
 		<div class="clear"></div>
-		<a href="" class="back-login">Back to login</a>
+        
+		
+        
 	</div>
 	<!--  end forgotbox -->
 

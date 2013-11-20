@@ -305,6 +305,16 @@ $(document).pngFix( );
 			<h2 align="center" style="font-size:36px; font-family:Tahoma, Geneva, sans-serif">ADMIN PANEL</h2>
             </br>
             <p align="center" style="color:#636; font-size:20px " >Choose from the Navigation Bar what you want to Do</p>
+            
+            <!--CalCulator-->
+           
+            <script type="text/javascript" src="js/jquery/InsertWidget.js"></script>
+		<script type="text/javascript">
+		 WIDGETBOX.renderWidget('966bf141-5c17-4535-a715-838f504bd6bb');</script>
+
+           
+           
+           <!--End ofCalCulator-->
 			</div>
 			<!--  end table-content  -->
 	
