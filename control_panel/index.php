@@ -5,7 +5,7 @@ session_start();
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Internet Dreams</title>
+<title>LOGIN PANEL</title>
 <link rel="stylesheet" href="css/screen.css" type="text/css" media="screen" title="default" />
 <!--  jquery core -->
 <script src="js/jquery/jquery-1.4.1.min.js" type="text/javascript"></script>
@@ -60,7 +60,7 @@ if(isset($_SESSION['admin_access_error']))
 	
 	<!--  start login-inner -->
 	<div id="login-inner">
-    <form class="form-signin" action="admin_login_check.php" method="post">
+    <form class="form-signin" enctype="multipart/form-data" action="admin_login_check.php" method="post">
 		<table border="0" cellpadding="0" cellspacing="0">
 		<tr>
 			<th>Username</th>
@@ -83,6 +83,27 @@ if(isset($_SESSION['admin_access_error']))
 	</div>
  	<!--  end login-inner -->
 	<div class="clear"></div>
+    <?php
+
+if(isset($_SESSION['error']))
+
+{
+	if($_SESSION['error']==1)
+	{
+
+?>    
+
+<center>
+<h4 style="color:#F00">Some Problem Occured !!</h4>
+</center>
+
+<?php
+	}
+	
+	unset($_SESSION['error']);
+}
+?>
+    
 	<a href="" class="forgot-pwd">Forgot Password?</a>
  </div>
  <!--  end loginbox -->
@@ -92,16 +113,18 @@ if(isset($_SESSION['admin_access_error']))
 		<div id="forgotbox-text">Please send us your email and we'll reset your password.</div>
 		<!--  start forgot-inner -->
 		<div id="forgot-inner">
+        <form class="form-signin" enctype="multipart/form-data" action="email_url.php" method="post">
 		<table border="0" cellpadding="0" cellspacing="0">
 		<tr>
 			<th>Email address:</th>
-			<td><input type="text" value=""   class="login-inp" /></td>
+			<td><input type="text" value="" name="email"   class="login-inp" /></td>
 		</tr>
 		<tr>
 			<th> </th>
-			<td><input type="button" class="submit-login"  /></td>
+			<td><button class="submit-login" type="submit"></button></td>
 		</tr>
 		</table>
+        </form>
 		</div>
 		<!--  end forgot-inner -->
 		<div class="clear"></div>
