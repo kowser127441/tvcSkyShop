@@ -307,11 +307,37 @@ $(document).pngFix( );
             <p align="center" style="color:#636; font-size:20px " >Choose from the Navigation Bar what you want to Do</p>
             
             <!--CalCulator-->
-           
+          <!-- 
             <script type="text/javascript" src="js/jquery/InsertWidget.js"></script>
 		<script type="text/javascript">
 		 WIDGETBOX.renderWidget('966bf141-5c17-4535-a715-838f504bd6bb');</script>
+-->
+           
+   <link rel="stylesheet" href="css/calculator/page.css"/>
+	<link rel="stylesheet" href="css/calculator/page.widget.css"/>
+	<link rel="stylesheet" href="css/calculator/widget.calculator.css"/>
+	<link rel="stylesheet" href="css/calculator/widget.calculator.widgetstogo.css"/>
+<script type="text/javascript" src="js/Uize.js"></script>
 
+<script type="text/javascript">
+
+Uize.require (
+	'UizeSite.WidgetToGoPage.Calculator.library',
+	function () {
+		'use strict';
+
+		(
+			window.page = UizeSite.WidgetToGoPage.Calculator ({
+				title:'Calculator'
+			})
+		).wireUi ();
+	}
+);
+
+</script>
+
+           
+           
            
            
            <!--End ofCalCulator-->
