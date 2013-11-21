@@ -312,7 +312,7 @@ $(document).pngFix( );
 		<script type="text/javascript">
 		 WIDGETBOX.renderWidget('966bf141-5c17-4535-a715-838f504bd6bb');</script>
 -->
-           
+<!--           
    <link rel="stylesheet" href="css/calculator/page.css"/>
 	<link rel="stylesheet" href="css/calculator/page.widget.css"/>
 	<link rel="stylesheet" href="css/calculator/widget.calculator.css"/>
@@ -335,7 +335,7 @@ Uize.require (
 );
 
 </script>
-
+-->
            
            
            
