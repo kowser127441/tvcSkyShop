@@ -1,112 +1,118 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>LOGIN PANEL</title>
-<link rel="stylesheet" href="css/screen.css" type="text/css" media="screen" title="default" />
-<!--  jquery core -->
-<script src="js/jquery/jquery-1.4.1.min.js" type="text/javascript"></script>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Admin Panel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-<!-- Custom jquery scripts -->
-<script src="js/jquery/custom_jquery.js" type="text/javascript"></script>
-
-<!-- MUST BE THE LAST SCRIPT IN <HEAD></HEAD></HEAD> png fix -->
-<script src="js/jquery/jquery.pngFix.pack.js" type="text/javascript"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-$(document).pngFix( );
-});
-</script>
-</head>
-<body id="login-bg"> 
- 
-<!-- Start: login-holder -->
-<div id="login-holder">
-
-	<!-- start logo -->
-	<div id="logo-login">
-		<a href="index.html"><img src="images/shared/logo.png" width="156" height="40" alt="" /></a>
-	</div>
-	<!-- end logo -->
-	
-	<div class="clear"></div>
-	
-	<!--  start loginbox ................................................................................. -->
-	<div id="loginbox">
-	
-	<!--  start login-inner -->
-	<div id="login-inner">
-
+    <!-- Le styles -->
+    <link rel="stylesheet" type="text/css" href="css/super_admin.css" />
     
-                    
-                <?php
-                
-                if(isset($_SESSION['error']))
-                
-                {
-                    if($_SESSION['error']==1)
-                    {
-                
-                ?>    
-                
-                <center>
-                <h4 style="color:#F00">Some Problem Occured !!</h4>
-                </center>
-                
-                <?php
-                    }
-                    
-                    unset($_SESSION['error']);
-                }
-                ?>
-                
-                
-                <?php
-                
-                $email= mysql_escape_string($_REQUEST['email']);
-                $token= mysql_escape_string($_REQUEST['token']);
-                
-                ?>
-                
-                        
-                      <form name="myForm" class="form-signin" action="changing_password_forgote.php" method="post" onsubmit="return validateForm()">
-                     <table border="0" cellpadding="0" cellspacing="0">
-                      <input type="hidden" name="email" value="<?php echo $email; ?>"> 
-                      <input type="hidden" name="token" value="<?php echo $token; ?>">
-                      <tr>
-                      
-                         <th>ENTER PASSWORD</th>
-                        <td><input type="password" class="login-inp" name="password"  placeholder="New Password" /></td>
-                        
-                        </tr>
-                        <tr>
-                        <th>RE-TYPE PASSWORD</th>
-                        <td><input type="password" class="login-inp" name="re_password"  placeholder="Re-Type Password" /></td>
-                        </tr>
-                        <tr>
-                        <th></th>
-                        <td><button class="submit-login" type="submit"></button></td>
-                        </tr>
-                        
-                        
-                        </table>
-                      </form>
-                      
-                </div>
-    
-	
- </div>
- <!--  end loginbox -->
- 
-	<!--  start forgotbox ................................................................................... -->
-	
-		<!--  end forgot-inner -->
-		<div class="clear"></div>
-		<a href="" class="back-login">Back to login</a>
-	</div>
-	<!--  end forgotbox -->
+   
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+
+  </head>
+
+  <body>
+
+   <div class="header">
+<img src="images/logo.png"  class="logo"/>
+
+
 
 </div>
-<!-- End: login-holder -->
-</body>
+
+<div class="divider">
+
+</div>
+<!--Main Menu-->
+
+
+
+
+<!--Contents-->
+
+<div class="content">
+<center>
+<h1> Forgot Password </h1>
+
+
+
+
+</center>
+
+  <div class="container" align="center">
+    
+    
+<?php
+
+if(isset($_SESSION['error']))
+
+{
+	if($_SESSION['error']==1)
+	{
+
+?>    
+
+<center>
+<h4 style="color:#F00">Some Problem Occured !!</h4>
+</center>
+
+<?php
+	}
+	
+	unset($_SESSION['error']);
+}
+?>
+
+
+<?php
+
+$email= mysql_escape_string($_REQUEST['email']);
+$token= mysql_escape_string($_REQUEST['token']);
+
+?>
+
+		
+      <form name="myForm" class="form-signin" action="changing_password_forgote.php" method="post" onsubmit="return validateForm()">
+      <input type="hidden" name="email" value="<?php echo $email; ?>"> 
+      <input type="hidden" name="token" value="<?php echo $token; ?>">
+        <h4 class="form-signin-heading">Enter Your New Password :</h4>
+        <input type="password" name="password"  placeholder="New Password">
+        <h4 class="form-signin-heading">Re-Type Password :</h4>
+        <input type="password" name="re_password"  placeholder="Again Password">
+        <button class="btn btn-large btn-primary" type="submit">OK</button>
+      </form>
+      
+      
+      
+      
+
+    </div> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+  </body>
 </html>

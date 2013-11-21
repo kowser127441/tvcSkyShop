@@ -1,42 +1,73 @@
 <?php
 session_start();
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>LOGIN PANEL</title>
-<link rel="stylesheet" href="css/screen.css" type="text/css" media="screen" title="default" />
-<!--  jquery core -->
-<script src="js/jquery/jquery-1.4.1.min.js" type="text/javascript"></script>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Admin Panel</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-<!-- Custom jquery scripts -->
-<script src="js/jquery/custom_jquery.js" type="text/javascript"></script>
+    <!-- Le styles -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+      }
 
-<!-- MUST BE THE LAST SCRIPT IN <HEAD></HEAD></HEAD> png fix -->
-<script src="js/jquery/jquery.pngFix.pack.js" type="text/javascript"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-$(document).pngFix( );
-});
-</script>
-</head>
-<body id="login-bg"> 
- 
-<!-- Start: login-holder -->
-<div id="login-holder">
+      .form-signin {
+        max-width: 300px;
+        padding: 19px 29px 29px;
+        margin: 0 auto 20px;
+        background-color: #fff;
+        border: 1px solid #e5e5e5;
+        -webkit-border-radius: 5px;
+           -moz-border-radius: 5px;
+                border-radius: 5px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                box-shadow: 0 1px 2px rgba(0,0,0,.05);
+      }
+      .form-signin .form-signin-heading,
+      .form-signin .checkbox {
+        margin-bottom: 10px;
+      }
+      .form-signin input[type="text"],
+      .form-signin input[type="password"] {
+        font-size: 16px;
+        height: auto;
+        margin-bottom: 15px;
+        padding: 7px 9px;
+      }
 
-	<!-- start logo -->
-	<div id="logo-login">
-		<a href="index.html"><img src="images/shared/logo.png" width="156" height="40" alt="" /></a>
-	</div>
-	<!-- end logo -->
-	
-	<div class="clear"></div>
-	
-	<!--  start loginbox ................................................................................. -->
-	<div id="loginbox">
-        
+    </style>
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+<!--
+    <link rel="shortcut icon" href="../assets/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+-->
+  </head>
+
+  <body>
+
+    <div class="container">
+    
+    
 <?php
 
 if(isset($_SESSION['admin_access_error']))
@@ -57,82 +88,38 @@ if(isset($_SESSION['admin_access_error']))
 	unset($_SESSION['admin_access_error']);
 }
 ?>
-	
-	<!--  start login-inner -->
-	<div id="login-inner">
-    <form class="form-signin" enctype="multipart/form-data" action="admin_login_check.php" method="post">
-		<table border="0" cellpadding="0" cellspacing="0">
-		<tr>
-			<th>Username</th>
-			<td><input type="text" name="name"  class="login-inp" placeholder="UserName" /></td>
-		</tr>
-		<tr>
-			<th>Password</th>
-			<td><input type="password" name="password"  class="login-inp" placeholder="Password" /></td>
-		</tr>
-		<tr>
-			<th></th>
-			<td valign="top"><input type="checkbox" class="checkbox-size" id="login-check" /><label for="login-check">Remember me</label></td>
-		</tr>
-		<tr>
-			<th></th>
-			<td> <button type="submit" class="submit-login" style="color:#306; size:1000"></button></td>
-		</tr>
-		</table>
-        </form>
-	</div>
- 	<!--  end login-inner -->
-	<div class="clear"></div>
-    <?php
+		
+      <form class="form-signin" action="admin_login_check.php" method="post">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <input type="text" name="name" class="input-block-level" placeholder="User Name">
+        <input type="password" name="password" class="input-block-level" placeholder="Password">
+        <label class="checkbox">
+          <input type="checkbox" value="remember-me"> Remember me
+          <br/>
+          <a href="forgot_password.php" style="font-size:9px">Forgot Password</a>
+        </label>
+        
+        <button class="btn btn-large btn-primary" type="submit">Sign in</button>
+      </form>
 
-if(isset($_SESSION['error']))
+    </div> <!-- /container -->
 
-{
-	if($_SESSION['error']==1)
-	{
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap-transition.js"></script>
+    <script src="js/bootstrap-alert.js"></script>
+    <script src="js/bootstrap-modal.js"></script>
+    <script src="js/bootstrap-dropdown.js"></script>
+    <script src="js/bootstrap-scrollspy.js"></script>
+    <script src="js/bootstrap-tab.js"></script>
+    <script src="js/bootstrap-tooltip.js"></script>
+    <script src="js/bootstrap-popover.js"></script>
+    <script src="js/bootstrap-button.js"></script>
+    <script src="js/bootstrap-collapse.js"></script>
+    <script src="js/bootstrap-carousel.js"></script>
+    <script src="js/bootstrap-typeahead.js"></script>
 
-?>    
-
-<center>
-<h4 style="color:#F00">Some Problem Occured !!</h4>
-</center>
-
-<?php
-	}
-	
-	unset($_SESSION['error']);
-}
-?>
-    
-	<a href="" class="forgot-pwd">Forgot Password?</a>
- </div>
- <!--  end loginbox -->
- 
-	<!--  start forgotbox ................................................................................... -->
-	<div id="forgotbox">
-		<div id="forgotbox-text">Please send us your email and we'll reset your password.</div>
-		<!--  start forgot-inner -->
-		<div id="forgot-inner">
-        <form class="form-signin" enctype="multipart/form-data" action="email_url.php" method="post">
-		<table border="0" cellpadding="0" cellspacing="0">
-		<tr>
-			<th>Email address:</th>
-			<td><input type="text" value="" name="email"   class="login-inp" /></td>
-		</tr>
-		<tr>
-			<th> </th>
-			<td><button class="submit-login" type="submit"></button></td>
-		</tr>
-		</table>
-        </form>
-		</div>
-		<!--  end forgot-inner -->
-		<div class="clear"></div>
-		<a href="" class="back-login">Back to login</a>
-	</div>
-	<!--  end forgotbox -->
-
-</div>
-<!-- End: login-holder -->
-</body>
+  </body>
 </html>
