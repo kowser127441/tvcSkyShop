@@ -87,7 +87,7 @@ $sub_category_id=$_REQUEST['sub_category_id'];
                 	<h2 class="cata_name"><?php echo $category_name; ?> <span class="cata_all"><a href="catagory.php?$category_id">View All <img src="images/catagory_arrow.png"></a></span></h2>
                     
                     <div class="product">
-                    	<a href="product.php" target="_blank"><img src="<?php echo 'control_panel/'.$dif_pic_url; ?>"></a>
+                    	<a href="product.php" target="_blank"><img src="<?php echo 'control_panel/'.$dif_pic_url;?>"></a>
                         <h1><a href="product.php" target="_blank"><?php echo $name ;?></a></h1>
                         <p class="old_price"><?php echo $price?></p>
                         <p class="special_price">Tk. 425.00</p>
