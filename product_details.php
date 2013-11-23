@@ -24,6 +24,9 @@ $product_id=$_REQUEST['product_id'];
             </div><!--end left-->
             
             <div id="pro_middle">
+            <script type="text/javascript" src="js/zoomer.js"></script>
+<script src='js/jquery-1.8.3.min.js'></script>
+<script src='js/jquery.elevateZoom-2.5.5.min.js'></script>
             <?php include('connection.php') ?>
              <?php
 					  //echo $sub_category_id2;
@@ -68,7 +71,11 @@ $product_id=$_REQUEST['product_id'];
 
             
             	<h1 class="pro_name"><?php echo $name ?>:</h1>
-                <div id="product_photo"><img src="<?php echo $dif_pic_url; ?>" style="width:360px; height:360px"></div><!--end product_photo-->
+                <div id="product_photo"><img src="<?php echo $dif_pic_url; ?>" id="zoom_01"  style="width:360px; height:360px">
+                <script>
+						$('#zoom_01').elevateZoom();
+					</script>
+                </div><!--end product_photo-->
                 <div id="pro_price">
                 	<div class="price">Price <br/>Tk. <?php echo $current_price; ?> <br/> <span class="discount">Tk. <?php echo $price; ?></span></div><!--end price-->
                     <div class="price">Discount <br/><?php echo $percentage;?>%</div><!--end price-->
