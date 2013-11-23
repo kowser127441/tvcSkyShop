@@ -3,9 +3,10 @@
 error_reporting(0);
 
 $product_id=$_REQUEST['product_id'];
-//$sub_category_id2=$_REQUEST['sub_category_id'];
+$name=$_REQUEST['product_name'];
+$category_id=$_REQUEST['category_id'];
 
-//echo $product_id;
+//echo $category_id;
 
 
 ?>
@@ -31,7 +32,7 @@ $product_id=$_REQUEST['product_id'];
              <?php
 					  //echo $sub_category_id2;
 
-	$sql = mysql_query("SELECT * FROM product WHERE product_id = $product_id ");
+	$sql = mysql_query("SELECT * FROM product WHERE product_id LIKE '%$product_id%' AND category_id LIKE '%$category_id%' ");
 			while($data=mysql_fetch_array($sql))	
 			{
 				$product_id = $data['product_id'];
@@ -61,6 +62,7 @@ $product_id=$_REQUEST['product_id'];
                 $day_left= round(abs(strtotime($discount_date)-strtotime($date))/86400);
                 $day_left = $discount_duration - $day_left;
 				
+				
 				$dif_pic=mysql_query("SELECT * FROM picture WHERE product_id='$product_id' AND _default='default'");
 					while($d_pic=mysql_fetch_array($dif_pic))
 					{
@@ -77,10 +79,25 @@ $product_id=$_REQUEST['product_id'];
 					</script>
                 </div><!--end product_photo-->
                 <div id="pro_price">
-                	<div class="price">Price <br/>Tk. <?php echo $current_price; ?> <br/> <span class="discount">Tk. <?php echo $price; ?></span></div><!--end price-->
+                	<div class="price">Price <br/>Tk. <?php echo $current_price; ?> <br/><?php if($discount_available == 'yes'){?> <span class="discount">Tk. <?php echo $price; ?></span><?php } ?></div><!--end price-->
+                    <?php
+                    if($discount_available == 'yes')
+					{
+					?>
                     <div class="price">Discount <br/><?php echo $percentage;?>%</div><!--end price-->
+                    
                     <div class="price">Save <br/>Tk. <?php echo $save_price ;?></div><!--end price-->
+                    <?php
+					}
+					?>
+                    <?php
+					if($discount_available == 'yes')
+					{
+						?>
                     <div class="price">Days Left <br/><?php echo $day_left; ?>Days</div><!--end price-->
+                    <?php
+					}
+					?>
                     <div class="order"><a href="order.php">Order Now</a></div><!--end price-->
                 </div><!--end pro_price-->
                 <div class="clear"></div>
@@ -103,24 +120,43 @@ $product_id=$_REQUEST['product_id'];
                 
                 <div id="pro_des">
                 	<div class="view_des">
+                    
+                    
+                      <?php
+                           
+                            if( $color !="")
+                            {
+                            ?>
+                            
+                            <h3 style="color:#51A0FF;">Color :</h3>
+                            <p style="color:#060;"><?php echo nl2br($color); ?></p>
+                    	<?php
+                    	}
+                    	?>
                     	<h2>Products Description</h2>
                         <ul>
-                        	<li><img src="images/dar.gif">Better taste, huge vapor.</li>
-                            <li><img src="images/dar.gif">Easy to fill liquid, use water to wash and clean.</span></li>
+                        					<?php
+                                            $details = str_replace(array("\r\n","\r","\n"),"<br/><img src='images/dar.gif' style='margin-top:15px;' /> ",$details);
+											?>
+                                            
+                                            
+                                            <span style="color:#333; font-family:'Trebuchet MS', Arial, Helvetica, sans-serif"><img src='images/dar.gif'/> <?php echo nl2br($details); ?> </span>
+                            <!--<li><img src="images/dar.gif">Easy to fill liquid, use water to wash and clean.</span></li>
                             <li><img src="images/dar.gif">Available Color: Black.</li>
                             <li><img src="images/dar.gif">With index 0.2ml-1.6ml on atomizer. Visible atomizer.</li>
-                            <li><img src="images/dar.gif">Match with 510, 510-T, EGO, EGO-T, EGO-W, EGO-C EGO-L etc.</li>
+                            <li><img src="images/dar.gif">Match with 510, 510-T, EGO, EGO-T, EGO-W, EGO-C EGO-L etc.</li>-->
                         </ul>
                     </div><!--end view_des-->
                     
                     <div class="view_des distance">
                     	<h2>Terms of Conditions</h2>
                         <ul>
-                        	<li><img src="images/dar.gif">Better taste, huge vapor.</li>
-                            <li><img src="images/dar.gif">Easy to fill liquid, use water to wash and clean.</span></li>
-                            <li><img src="images/dar.gif">Available Color: Black.</li>
-                            <li><img src="images/dar.gif">With index 0.2ml-1.6ml on atomizer. Visible atomizer.</li>
-                            <li><img src="images/dar.gif">Match with 510, 510-T, EGO, EGO-T, EGO-W, EGO-C EGO-L etc.</li>
+                        	 <?php 
+						 
+						 $terms = str_replace(array("\r\n","\r","\n"),"<br/> <img src='images/dar.gif' style='margin-top:15px;'/> ",$terms);
+						 
+						 ?>
+                            <span style="color:#333; font-family:'Trebuchet MS', Arial, Helvetica, sans-serif""><img src='images/dar.gif'/> <?php echo nl2br($terms); ?> </span>
                         </ul>
                     </div><!--end view_des-->
                 </div><!--end pro_des-->
@@ -129,31 +165,13 @@ $product_id=$_REQUEST['product_id'];
             <div id="right">
             	<h2 class="pro_name">Related Products</h2>
                 
+                
                 <div class="rel_product">
-                   	<a href="product.php"><img src="images/cata-img/csw_single_stripe_brown_by_civvy_street.jpg"></a>
-                    <h1><a href="product.php">CSW Single Stripe (Brown)</a></h1>
-                    <p class="old_price">Tk. 650.00</p>
-                 	<p class="special_price">Tk. 425.00</p>
+                   	<a href="product.php"><img src="<?php echo $dif_pic_url; ?>"></a>
+                    <h1><a href="product.php"><?php echo $name ;?></h1>
+                    <p class="old_price"><?php //echo $old_price ;?></p>
+                 	<p class="special_price"><?php //echo $current_price;?></p>
                  </div><!--end product-->
-                 
-                 <div class="rel_product">
-                   	<a href="product.php"><img src="images/cata-img/csw_single_stripe_brown_by_civvy_street.jpg"></a>
-                    <h1><a href="product.php">CSW Single Stripe (Brown)</a></h1>
-                    <p class="old_price">Tk. 650.00</p>
-                 	<p class="special_price">Tk. 425.00</p>
-                 </div><!--end product-->
-                 
-                 <div class="rel_product">
-                   	<a href="product.php"><img src="images/cata-img/csw_single_stripe_brown_by_civvy_street.jpg"></a>
-                    <h1><a href="product.php">CSW Single Stripe (Brown)</a></h1>
-                    <p class="old_price">Tk. 650.00</p>
-                 	<p class="special_price">Tk. 425.00</p>
-                 </div><!--end product-->
-                 
-                 <div class="rel_product">
-                   	<a href="product.php"><img src="images/cata-img/csw_single_stripe_brown_by_civvy_street.jpg"></a>
-                    <h1><a href="product.php">CSW Single Stripe (Brown)</a></h1>
-                    <p class="old_price">Tk. 650.00</p>
-                 	<p class="special_price">Tk. 425.00</p>
-                 </div><!--end product-->
+               
+               
             </div><!--end right-->

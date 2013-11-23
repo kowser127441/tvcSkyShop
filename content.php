@@ -35,9 +35,26 @@
                 </div><!--end pro_slider--><div class="clear"></div>
                 
                 <div class="catagory">
-                	<h2 class="cata_name">Health and Harbal <span class="cata_all"><a href="catagory.php">View All <img src="images/catagory_arrow.png"></a></span></h2>
+                <?php include('connection.php')?>
+                <?php
+				
+				 $cat_sql = mysql_query("SELECT * FROM category ");
+			 while($cat_data= mysql_fetch_array($cat_sql))
+			 {
+				 $category_id = $cat_data['category_id'];
+				$category_name = $cat_data['category_name'];
+			 }
+				
+				?>
+                
+                	<h2 class="cata_name">Health and Harbal <span class="cata_all"><a href="category.php?category_id=1">View All <img src="images/catagory_arrow.png"></a></span></h2>
                     
                     <div class="product">
+                    
+                    
+                    
+                    
+                    
                     	<a href="product.php" target="_blank"><img src="images/cata-img/csw_single_stripe_brown_by_civvy_street.jpg"></a>
                         <h1><a href="product.php" target="_blank">CSW Single Stripe (Brown)</a></h1>
                         <p class="old_price">Tk. 650.00</p>
