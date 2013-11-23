@@ -1,3 +1,14 @@
+<?php 
+
+error_reporting(0);
+
+$product_id=$_REQUEST['product_id'];
+//$sub_category_id2=$_REQUEST['sub_category_id'];
+
+//echo $product_id;
+
+
+?>
 			<div id="left">
             	<div id="menu">
                 	<!--start menu-->
@@ -13,23 +24,73 @@
             </div><!--end left-->
             
             <div id="pro_middle">
-            	<h1 class="pro_name">Product Name:</h1>
-                <div id="product_photo"></div><!--end product_photo-->
+            <?php include('connection.php') ?>
+             <?php
+					  //echo $sub_category_id2;
+
+	$sql = mysql_query("SELECT * FROM product WHERE product_id = $product_id ");
+			while($data=mysql_fetch_array($sql))	
+			{
+				$product_id = $data['product_id'];
+				$name = $data['product_name'];
+				$details = $data['details'];
+				$terms = $data['terms'];
+				$price = $data['price'];
+				$old_price = $price;
+				$size = $data['size'];
+				$discount = $data['discount'];
+				
+				$current_price = $price - $discount;
+				
+				$percentage = intval( ($discount * 100 ) / $price );
+				
+				$new_price = $price - $discount ;
+				
+				$save_price = $price - $current_price ;
+				
+				
+				$discount_available = $data['discount_available'];
+				$discount_duration = $data['discount_duration'];
+				$discount_date= $data['discount_date'];
+				
+				
+				$date = date('Y-m-d H:i:s');
+                $day_left= round(abs(strtotime($discount_date)-strtotime($date))/86400);
+                $day_left = $discount_duration - $day_left;
+				
+				$dif_pic=mysql_query("SELECT * FROM picture WHERE product_id='$product_id' AND _default='default'");
+					while($d_pic=mysql_fetch_array($dif_pic))
+					{
+						$dif_pic_url=  'control_panel/'.$d_pic['picture_url'];
+					}
+			}
+			?>
+
+            
+            	<h1 class="pro_name"><?php echo $name ?>:</h1>
+                <div id="product_photo"><img src="<?php echo $dif_pic_url; ?>" style="width:360px; height:360px"></div><!--end product_photo-->
                 <div id="pro_price">
-                	<div class="price">Price <br/>Tk. 5000.00 <br/> <span class="discount">Tk. 4000.00</span></div><!--end price-->
-                    <div class="price">Discount <br/>10%</div><!--end price-->
-                    <div class="price">Save <br/>Tk. 1000.00</div><!--end price-->
-                    <div class="price">Days Left <br/>10 Days</div><!--end price-->
+                	<div class="price">Price <br/>Tk. <?php echo $current_price; ?> <br/> <span class="discount">Tk. <?php echo $price; ?></span></div><!--end price-->
+                    <div class="price">Discount <br/><?php echo $percentage;?>%</div><!--end price-->
+                    <div class="price">Save <br/>Tk. <?php echo $save_price ;?></div><!--end price-->
+                    <div class="price">Days Left <br/><?php echo $day_left; ?>Days</div><!--end price-->
                     <div class="order"><a href="order.php">Order Now</a></div><!--end price-->
                 </div><!--end pro_price-->
                 <div class="clear"></div>
                 
                 <div id="pro_view">
-                	<div class="pro_view_img"></div><!--end pro_view_img-->
-                    <div class="pro_view_img"></div><!--end pro_view_img-->
-                    <div class="pro_view_img"></div><!--end pro_view_img-->
-                    <div class="pro_view_img"></div><!--end pro_view_img-->
-                    <div class="pro_view_img"></div><!--end pro_view_img-->
+                <?php  
+					 
+                       $pic_sql = mysql_query("SELECT * FROM picture WHERE product_id='$product_id' LIMIT 5");
+					while($s_pic = mysql_fetch_array($pic_sql))
+					{
+						$picture_url=  'control_panel/'.$s_pic['picture_url'];
+						
+                        ?>
+                	<div class="pro_view_img"><img src="<?php echo $picture_url; ?>" onclick="changeImage('<?php echo $picture_url; ?>')" style="cursor:pointer; width:100px; height:100px"   /></div><!--end pro_view_img--><?php
+					}
+					?>
+                   
                 </div><!--end pro_view-->
                 <div class="clear"></div>
                 
