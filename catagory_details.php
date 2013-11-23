@@ -96,9 +96,21 @@ $sub_category_id2=$_REQUEST['sub_category_id'];
                     <div class="product">
                     
                     	<a href="product.php?category_id=<?php echo  $category_id; ?>&product_id=<?php echo $product_id; ?>" target="_blank"><img src="<?php echo $dif_pic_url?>"></a>
-                        <h1><a href="product.php?product_id=<?php echo $product_id; ?>" target="_blank"><?php echo $name ; ?></a></h1>
+                        <h1><a href="product.php?product_id=<?php echo $product_id; ?>" target="_blank"><?php echo $name ; ?></a></h1>                    <?php 
+						if($discount_available == 'yes')
+						{
+						?>
                         <p class="old_price">Tk.<?php echo $old_price; ?></p>
                         <p class="special_price">Tk.<?php echo $price ; ?></p>
+                        <?php
+						}
+						else{
+							?>
+							<p class="special_price">Tk.<?php echo $old_price ; ?></p>
+                            <?php
+						}
+			
+                            ?>
                     </div><!--end product-->
                     <?php 
 					

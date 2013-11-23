@@ -2,7 +2,7 @@
         	<div id="footer_content">
             	<div class="foot_cont">
                 	<h2 class="foot_title">About Us</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque placerat lorem ipsum, et porttitor lectus commodo non. Nullam a nisi a turpis condimentum gravida ac sed nibh. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. <a href="#">See More</a></p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque placerat lorem ipsum, et porttitor lectus commodo non. Nullam a nisi a turpis condimentum gravida ac sed nibh. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. <a href="about_us.php">See More</a></p>
                 </div><!--end foot_cont-->
                 
                 <div class="foot_cont gap">
