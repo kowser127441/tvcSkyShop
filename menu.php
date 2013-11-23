@@ -5,7 +5,7 @@ include("connection.php");
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="css/menu.css">
-	<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
+	<script src='js/jquery.min.js'></script>
 </head>
 <body>
 <div id='cssmenu'>
