@@ -1,7 +1,4 @@
 <?php
-ob_start();
-?>
-<?php
 session_start();
 
 if (isset($_SESSION['admin_access']) && isset($_SESSION['user_id'])  && isset($_SESSION['password']) ) 
@@ -91,6 +88,7 @@ function validateForm()
 function changecategory()
 		{
 			
+			
 			  var xmlhttp;
 			  if (window.XMLHttpRequest)
 			  {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -126,6 +124,7 @@ function changecategory()
 function changecategory2()
 		{
 			
+		
 			  var xmlhttp;
 			  if (window.XMLHttpRequest)
 			  {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -159,7 +158,12 @@ function changecategory2()
 
 		}
 
-
+function changecategory3()
+		{
+		
+		document.getElementById("add").style.visibility = "visible"; 
+			
+		}
 
 
 
@@ -193,7 +197,6 @@ $(document).ready ( function ()
 
 <!-- Table END -->
  
- 
  <script type="text/javascript">
 // Delete Confirmation
 
@@ -214,7 +217,8 @@ else
     }
  }
  
- </script>
+ </script> 
+ 
  
  
 
@@ -238,7 +242,7 @@ else
 <div class="menu">
 
  <?php
-   include("view_menu.php");
+   include("add_menu.php");
    ?>
 
 
@@ -249,12 +253,12 @@ else
 
 <div class="content">
 <center>
-<h2>View Product</h2>
+<h2>Add Popular Product</h2>
 
 </center>
 
  <?php
-			include("view_sidebutton.php");
+			include("add_sidebutton.php");
 	?>
     
     
@@ -281,19 +285,10 @@ else
 	   ?>
      </center>
     
- <?php
- error_reporting(0);
- 
- 
- $category_id=$_POST['category'];
-  $sub_category_id=$_POST['sub_category'];
- 
- 
- 
- ?>   
+    
     
     <br/><br/><br/>
-    <form method="post"   action="view_products.php" style="margin-left:20px"  name="myForm" onsubmit="return validateForm-duisabled()">
+    <form method="post"   action="adding_popular_product.php" style="margin-left:20px"  name="myForm" onsubmit="return validateForm()">
     
     
     <table width="500" border="0">
@@ -325,21 +320,23 @@ else
         </tr>
          <tr>
         <td>Sub Category : </td>
-        <td><span id="bodyspan">
-       
-         </span></td>
+        <td><span id="bodyspan"> </span></td>
         </tr>
         
-      <!--  <tr>
+        <tr>
         <td>Product Name : </td>
         <td><span id="bodyspan_2"> </span></td>
         </tr>
-       -->
+       
        
          <tr>
           <td></td>
             <td>
-            <input type="submit" value="Search"  style="margin-left:100px; height:30px; width:80px; font-size:15px;">
+            
+           <span id="add" style=" visibility:hidden">
+            <input type="submit" value="Add"  style="margin-left:100px; height:30px; width:80px; font-size:15px;">
+            </span>
+            
             </td>
           </tr>
   
@@ -349,20 +346,15 @@ else
       </form>
     
     
-    <h3>Products : </h3>
+    <center><h3>Current Popular Products</h3></center>
     
     
 
-<table class="data display datatable" id="example" style="width:850px; magin-left:100px;">
+<table class="data display datatable" id="example" style="width:850px;">
 		<thead>
 			<tr>
 		            <th>SL.</th>
 					<th>Product Name</th>
-                    <th>Category</th>
-                    <th>Sub-Category</th>
-					<th>Details</th>
-                    <th>Price</th>
-                    <th>Discount</th>
                     <th>Picture</th>
                     <th>Action</th>
                     
@@ -375,35 +367,21 @@ else
 						
 						$i = 1;
 							
+						$query=mysql_query("SELECT * FROM popular_product ORDER BY product_id DESC");
+						while($data=mysql_fetch_array($query))
+						{
 						
-						$p_query=mysql_query("SELECT * FROM product WHERE category_id LIKE '%$category_id%' AND sub_category_id LIKE '%$sub_category_id%'");	
+						$h_product_id=$data['product_id'];	
+						
+						$p_query=mysql_query("SELECT * FROM product WHERE product_id='$h_product_id'");	
 						while($h_data=mysql_fetch_array($p_query))
 						{	
-							$product_id = $h_data['product_id'];
-							$category_id = $h_data['category_id'];
-							$sub_category_id = $h_data['sub_category_id'];
-							
-							$pic_query=mysql_query("SELECT * FROM picture WHERE product_id='$product_id'");
+						
+							$pic_query=mysql_query("SELECT * FROM picture WHERE product_id='$h_product_id'");
 							while($pic=mysql_fetch_array($pic_query))
 							{
 								$pic_url=$pic['picture_url'];	
 							}
-							
-							// GETTING CATEGORY NAME
-							
-						$cat_sql=mysql_query("SELECT category_name FROM category WHERE category_id='$category_id' ");
-						while($cat_data=mysql_fetch_array($cat_sql))
-						{
-							$category_name=$cat_data['category_name'];	
-						}
-						
-							// GETTING SUB-CATEGORY NAME
-							
-						$cat_sql=mysql_query("SELECT sub_category_name FROM sub_category WHERE sub_category_id='$sub_category_id'");
-						while($cat_data=mysql_fetch_array($cat_sql))
-						{
-							$sub_category_name=$cat_data['sub_category_name'];	
-						}
 					
 						
 					?>
@@ -413,29 +391,11 @@ else
 				<td><?php echo $i;?></td>
                 
 				<td class="center">
-				<?php echo $h_data['product_name']; ?>
+				
+                <?php echo $h_data['product_name']; ?>
+                               
                 </td>
-                
-                <td class="center">
-				<?php echo $category_name; ?>
-                </td>
-                
-                <td class="center">
-				<?php echo $sub_category_name; ?>
-                </td>
-                
-                
-				<td class="center">
-					   <?php echo $h_data['details']; ?>
-                </td>
-                
-                <td class="center">
-					   <?php echo $h_data['price']; ?>
-                </td>
-                
-                <td class="center">
-					   <?php echo $h_data['discount']; ?>
-                </td>
+				
                 
                 <td class="center">
 					 <img src="<?php echo '../control_panel/'.$pic_url; ?>" style="width:150px;" >
@@ -446,7 +406,7 @@ else
                  <td class="center">
                  
 
-                 <a href="remove_product.php?product_id=<?php echo $product_id; ?>"  onClick="return confarmation()">Remove</a>
+                 <a href="remove_popular_product.php?product_id=<?php echo $h_product_id; ?>"  onClick="return confarmation()">Remove</a>
                 
                 </td>
                 
@@ -456,7 +416,7 @@ else
            <?php
 
 					 $i=$i+1;
-						
+						}
 						}
 					
 					 ?>

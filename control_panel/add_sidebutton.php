@@ -11,6 +11,7 @@
               <li><a href="add_discount.php">Add Discount</a></li>
               <li><a href="add_picture.php">Add Picture</a></li>
               <li><a href="add_homepage_product.php">Add Homepage Product</a></li>
+              <li><a href="add_popular_products.php">Add Popular Product</a></li>
               <li><a href="add_slider_image.php">Add Slider Image</a></li>
               <li><a href="add_advertaisement.php">Add Advertaisement</a></li>
               

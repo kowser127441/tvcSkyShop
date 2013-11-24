@@ -95,11 +95,32 @@
     <div class="wmuSlider example3">
         
         <div class="wmuSliderWrapper">
+        <?php include('connection.php');?>
+            <?php
+			
+			$sql= mysql_query("SELECT * FROM popular_product");
+			while($data = mysql_fetch_array($sql))
+			{
+				$product_id = $data['product_id'];
+				
+			$pic_query=mysql_query("SELECT * FROM picture WHERE product_id='$product_id' AND _default='default'");
+			 while($pic_data=mysql_fetch_array($pic_query))
+				{
+				   $picture=$pic_data['picture_url'];	
+								
+			     }
+				// echo 'aasas';
+			?>
             <article>
-                <img src="bottom-slider/images/1.jpg" />
-            </article>
+            
+                <img src="<?php echo 'control_panel/'.$picture ; ?>" />
+                </article>
+			<?php
+				}
+			?>
+            
     
-            <article>
+           <!-- <article>
                 <img src="bottom-slider/images/logo_Aesthetic-eStore.jpg" />
             </article>
     
@@ -141,7 +162,7 @@
             
             <article>
                 <img src="bottom-slider/images/logo_Minsa-Enterprise-eStore.jpg" />
-            </article>
+            </article>-->
         </div>
                         
     
